@@ -19,7 +19,6 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h2>Adviser</h2>
       </div>
 
       <nav class="menu">
