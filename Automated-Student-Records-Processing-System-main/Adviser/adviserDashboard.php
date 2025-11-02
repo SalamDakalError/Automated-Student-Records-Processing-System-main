@@ -18,12 +18,10 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="sidebar-header">
-      </div>
 
       <nav class="menu">
-        <a href="#" class="active"><img src="icons/dashboard.png" alt="">Dashboard</a>
-        <a href="#"><img src="icons/students.png" alt="">Students</a>
+        <a href="adviserDashboard.php" class="active"><img src="icons/dashboard.png" alt="">Dashboard</a>
+        <a href="student_list.php"><img src="icons/students.png" alt="">Students</a>
         <a href="#"><img src="icons/advisory.png" alt="">Advisory</a>
         <a href="#"><img src="icons/files.png" alt="">Files</a>
       </nav>
@@ -38,7 +36,7 @@
         </div>
 
         <!-- Sign Out -->
-        <form action="loginBJLBB.php" method="post" style="margin:0;">
+        <form action="../Login/loginBJLBB.php" method="post" style="margin:0;">
           <button type="submit" class="signout">
             <img src="icons/logout.png" alt="">Sign Out
           </button>
