@@ -2,7 +2,8 @@
 SQLyog Ultimate - MySQL GUI v8.2 
 MySQL - 5.5.5-10.1.25-MariaDB : Database - school_login
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
