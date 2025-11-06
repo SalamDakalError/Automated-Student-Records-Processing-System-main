@@ -25,7 +25,7 @@
       </div>
 
       <div class="sidebar-footer">
-        <button class="signout">
+        <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon">
           Sign Out
         </button>
@@ -45,11 +45,11 @@
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
             <div>
               <label>Subject Code:</label>
-              <span style="font-weight: 600;"></span>
+              <span style="font-weight: 600;" id="subjectCode">ESP-5</span>
             </div>
             <div>
               <label>Grade Level:</label>
-              <span style="font-weight: 600;"></span>
+              <span style="font-weight: 600;" id="gradeLevel">Grade 5</span>
             </div>
             <div>
               <label>Section:</label>
@@ -73,9 +73,10 @@
                 <th style="width: 150px;">Remarks</th>
               </tr>
             </thead>
-            <tbody>
-              <?php
-              ?>
+            <tbody id="studentTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: #888;">No students available</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -83,5 +84,7 @@
     </main>
   </div> <!-- end dashboard container -->
 
+  <!-- ===== JAVASCRIPT FILE LINK ===== -->
+  <script src="scriptTeacherStudents.js"></script>
 </body>
 </html>

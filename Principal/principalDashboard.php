@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adviser Dashboard</title>
+  <title>Principal Dashboard</title>
   <link rel="stylesheet" href="stylePrincipalDashboard.css">
 </head>
 <body>
@@ -18,30 +18,23 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>Adviser</h2>
-      </div>
-
       <nav class="menu">
-        <a href="#" class="active"><img src="icons/dashboard.png" alt="">Dashboard</a>
-        <a href="#"><img src="icons/files.png" alt="">Files</a>
+        <a href="principal_dashboard.php" class="active">
+          <img src="dashboard.png" alt="Dashboard Icon">
+          Dashboard
+        </a>
+        <a href="principal_files.php">
+          <img src="google-docs.png" alt="Files Icon">
+          Files
+        </a>
       </nav>
 
+      <!-- SIDEBAR FOOTER -->
       <div class="sidebar-footer">
-        <div class="user-info">
-          <div class="avatar"></div>
-          <div>
-            <strong>Mamaril Khian Kervy</strong><br>
-            <span>Principal</span>
-          </div>
-        </div>
-
-        <!-- Sign Out -->
-        <form action="loginBJLBB.php" method="post" style="margin:0;">
-          <button type="submit" class="signout">
-            <img src="icons/logout.png" alt="">Sign Out
-          </button>
-        </form>
+        <button class="signout" id="signoutBtn">
+          <img src="out.png" alt="Logout Icon">
+          Sign Out
+        </button>
       </div>
     </aside>
 
