@@ -3,120 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Students</title>
+  <title>Adviser | Students</title>
   <link rel="stylesheet" href="styleAdviserDashboard.css">
-  <link rel="stylesheet" href="styleStudentList.css">
 </head>
 <body>
 
-  <!-- HEADER BAR -->
+  <!-- ===== HEADER ===== -->
   <header class="header">
-    <img src="OIP.png" alt="DepEd Logo">
+    <img src="OIP.png" alt="Logo">
     <h1>Adviser</h1>
   </header>
 
+  <!-- ===== DASHBOARD CONTAINER ===== -->
   <div class="dashboard-container">
-
-    <!-- SIDEBAR -->
+    
     <aside class="sidebar">
-
-      <nav class="menu">
-        <a href="adviserDashboard.php"><img src="icons/dashboard.png" alt="">Dashboard</a>
-        <a href="student_list.php" class="active"><img src="icons/students.png" alt="">Students</a>
-        <a href="#"><img src="icons/advisory.png" alt="">Advisory</a>
-        <a href="#"><img src="icons/files.png" alt="">Files</a>
-      </nav>
+      <div class="menu">
+        <a href="adviserDashboard.php"><img src="dashboard.png" alt="">Dashboard</a>
+        <a href="student_list.php" class="active"><img src="User.png" alt="">Students</a>
+        <a href="advisory.php"><img src="google-docs.png" alt="">Advisory</a>
+        <a href="files.php"><img src="google-docs.png" alt="">Files</a>
+      </div>
 
       <div class="sidebar-footer">
-        <div class="user-info">
-          <div class="avatar"></div>
-          <div>
-            <strong>Manarang John Paul</strong><br>
-            <span>Adviser</span>
-          </div>
-        </div>
-
-        <form action="../Login/loginBJLBB.php" method="post" style="margin:0;">
-          <button type="submit" class="signout">
-            <img src="icons/logout.png" alt="">Sign Out
-          </button>
-        </form>
+        <button class="signout" id="signoutBtn">
+          <img src="out.png" alt="Logout Icon">
+          Sign Out
+        </button>
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
-      <div class="topbar">
-        <h3>Students</h3>
-        <p>Overview of Students</p>
-      </div>
-
-      <div class="panel">
-        <div class="field">
-          <label for="subject_code">Subject Code</label>
-          <select id="subject_code" name="subject_code">
-            <option>Math</option>
-            <option>English</option>
-          </select>
+      <section class="content-box active" id="students">
+        <div class="section-header">
+          <div>
+            <h2>Students</h2>
+            <p style="color: #666;">Overview of Students</p>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="grade_level">Grade Level</label>
-          <select id="grade_level" name="grade_level">
-            <option>7</option>
-            <option>8</option>
-          </select>
+        <div style="background-color: #d9e8ef; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+            <div>
+              <label>Subject Code:</label>
+              <span style="font-weight: 600;" id="subjectCode">Math</span>
+            </div>
+            <div>
+              <label>Grade Level:</label>
+              <span style="font-weight: 600;" id="gradeLevel">Grade 5</span>
+            </div>
+            <div>
+              <label>Section:</label>
+              <select id="section" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="section">Section</label>
-          <select id="section" name="section">
-            <option>--</option>
-            <option>A</option>
-            <option>B</option>
-          </select>
+        <!-- Students Table -->
+        <div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 60px;">No.</th>
+                <th>Fullname</th>
+                <th style="width: 120px;">Grade</th>
+                <th style="width: 150px;">Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: #888;">No students available</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <div class="search-box">
-          <label for="show_count">Show</label>
-          <select id="show_count" name="show_count">
-            <option>10</option>
-            <option>25</option>
-            <option>50</option>
-          </select>
-
-          <input id="search_query" type="text" placeholder="Search...">
-          <button class="btn">Filter</button>
-        </div>
-      </div>
-
-      <div class="students-table">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:60px">No.</th>
-              <th>Fullname</th>
-              <th style="width:120px">Grade</th>
-              <th style="width:150px">Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Flora, Kyrill Chudomirevich</td>
-              <td>99</td>
-              <td>Passed</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Manarang, John Paul</td>
-              <td>90</td>
-              <td>Passed</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      </section>
     </main>
-  </div>
+  </div> <!-- end dashboard container -->
+
+  <!-- ===== JAVASCRIPT FILE LINK ===== -->
+  <script src="scriptAdviser.js"></script>
 </body>
 </html>

@@ -7,104 +7,91 @@
   <link rel="stylesheet" href="styleAdviserDashboard.css">
 </head>
 <body>
-
-  <!-- HEADER BAR -->
+  <!-- ===== HEADER ===== -->
   <header class="header">
-    <img src="OIP.png" alt="DepEd Logo">
+    <img src="OIP.png" alt="Logo">
     <h1>Adviser</h1>
   </header>
 
+  <!-- ===== DASHBOARD CONTAINER ===== -->
   <div class="dashboard-container">
-
-    <!-- SIDEBAR -->
+    <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar">
+      <div class="menu">
+        <a href="adviserDashboard.php" class="active">
+          <img src="dashboard.png" alt="Dashboard Icon">
+          Dashboard
+        </a>
+        <a href="student_list.php">
+          <img src="User.png" alt="Student Icon">
+          Student
+        </a>
+        <a href="advisory.php">
+          <img src="class.png" alt="Advisory Icon">
+          Advisory
+        </a>
+        <a href="files.php">
+          <img src="google-docs.png" alt="Files Icon">
+          Files
+        </a>
+      </div>
 
-      <nav class="menu">
-        <a href="adviserDashboard.php" class="active"><img src="icons/dashboard.png" alt="">Dashboard</a>
-        <a href="student_list.php"><img src="icons/students.png" alt="">Students</a>
-        <a href="#"><img src="icons/advisory.png" alt="">Advisory</a>
-        <a href="#"><img src="icons/files.png" alt="">Files</a>
-      </nav>
-
+      <!-- ===== SIDEBAR FOOTER ===== -->
       <div class="sidebar-footer">
-        <div class="user-info">
-          <div class="avatar"></div>
-          <div>
-            <strong>Manarang John Paul</strong><br>
-            <span>Adviser</span>
-          </div>
-        </div>
-
-        <!-- Sign Out -->
-        <form action="../Login/loginBJLBB.php" method="post" style="margin:0;">
-          <button type="submit" class="signout">
-            <img src="icons/logout.png" alt="">Sign Out
-          </button>
-        </form>
+        <button class="signout" id="signoutBtn">
+          <img src="out.png" alt="Logout Icon"> Sign Out
+        </button>
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- ===== MAIN CONTENT ===== -->
     <main class="main-content">
-      <div class="topbar">
-        <h3>Dashboard</h3>
-        <p>Overview of Students</p>
-      </div>
+      <section class="content-box active" id="dashboard">
+        <div class="section-header">
+          <h2>Dashboard</h2>
+          <span style="color: #666; font-size: 14px;">(Overview of Advisory & Files)</span>
+        </div>
 
-      <!-- STATS CARDS -->
-      <div class="stats">
-        <div class="card">
-          <div class="dot green"></div>
-          <p>Total Enrolled Students</p>
-          <h2>0</h2>
+        <!-- Summary Cards -->
+        <div style="display: flex; gap: 20px; margin-bottom: 30px; margin-top: 20px;">
+          <div class="summary-card">
+            <h3>Total Students</h3>
+            <p id="studentCount">—</p>
+          </div>
+          <div class="summary-card">
+            <h3>With Honors</h3>
+            <p id="honorstudent">—</p>
+          </div>
+          <div class="summary-card">
+            <h3>Total Files</h3>
+            <p id="fileCount">—</p>
+          </div>
         </div>
-        <div class="card">
-          <div class="dot green"></div>
-          <p>With Honors</p>
-          <h2>0</h2>
-        </div>
-        <div class="card">
-          <div class="dot green"></div>
-          <p>Total Files</p>
-          <h2>0</h2>
-        </div>
-      </div>
 
-      <!-- FILES TABLE -->
-      <div class="files-section">
-        <h3>FILES</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Filename</th>
-              <th>Submitted Date</th>
-              <th>Status</th>
-              <th>Approve Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ESP-5-Magsaysay</td>
-              <td>January 13, 2025</td>
-              <td><span class="status approve">Approve</span></td>
-              <td>January 25, 2025</td>
-            </tr>
-            <tr>
-              <td>ESP-5-Quezon</td>
-              <td>January 13, 2025</td>
-              <td><span class="status pending">Pending</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>ESP-VI-Earth</td>
-              <td>January 13, 2025</td>
-              <td><span class="status approve">Approve</span></td>
-              <td>January 25, 2025</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- File Table -->
+        <div>
+          <h3 style="margin-bottom: 10px;">Recent Files</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Filename</th>
+                <th>Submitted Date</th>
+                <th>Status</th>
+                <th>Approved Date</th>
+              </tr>
+            </thead>
+            <tbody id="fileTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: #888;">No data available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script src="scriptAdviser.js"></script>
 </body>
 </html>
