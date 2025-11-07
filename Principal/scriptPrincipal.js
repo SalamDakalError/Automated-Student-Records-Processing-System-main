@@ -1,4 +1,4 @@
-// ===== Navigation handling =====
+// ===== Navigation and Sign Out handling =====
 document.addEventListener('DOMContentLoaded', function() {
   // Sign out button handling
   const signoutBtn = document.getElementById('signoutBtn');
@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Add active class to clicked link
       this.classList.add('active');
-      
-      // Allow default navigation to proceed
     });
   });
 });

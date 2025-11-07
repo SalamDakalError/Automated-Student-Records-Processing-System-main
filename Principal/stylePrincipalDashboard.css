@@ -87,10 +87,27 @@ body {
 
 /* ===== SIDEBAR FOOTER ===== */
 .sidebar-footer {
-  padding: 15px 25px;
-  border-top: 1px solid #d6d6d6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin-top: auto;
+  border-top: 1px solid #d6d6d6;
+}
+
+.user-info {
+  width: 100%;
+  padding: 0 0 15px 0;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.user-name {
+  color: #333;
+  font-size: 16px;
+  margin: 0;
+  font-weight: 600;
 }
 
 .signout {

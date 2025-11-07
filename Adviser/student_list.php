@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +27,15 @@
       </div>
 
       <div class="sidebar-footer">
+        <div class="user-info">
+          <?php
+            if (!empty($_SESSION['name'])) {
+              echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+            } else {
+              echo '<p class="user-name">Not logged in</p>';
+            }
+          ?>
+        </div>
         <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon">
           Sign Out

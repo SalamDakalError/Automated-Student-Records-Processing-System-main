@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +33,15 @@
 
       <!-- SIDEBAR FOOTER -->
       <div class="sidebar-footer">
+        <div class="user-info">
+          <?php
+            if (!empty($_SESSION['name'])) {
+              echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+            } else {
+              echo '<p class="user-name">Not logged in</p>';
+            }
+          ?>
+        </div>
         <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon">
           Sign Out
@@ -96,9 +106,14 @@
 
   <script>
     // Sign out functionality
-    document.getElementById('signoutBtn').addEventListener('click', function() {
-      if(confirm('Are you sure you want to sign out?')) {
-        window.location.href = 'logout.php';
+    document.addEventListener('DOMContentLoaded', function() {
+      const signoutBtn = document.getElementById('signoutBtn');
+      if (signoutBtn) {
+        signoutBtn.addEventListener('click', function() {
+          if (confirm('Are you sure you want to sign out?')) {
+            window.location.href = '../Login/logout.php';
+          }
+        });
       }
     });
 

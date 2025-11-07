@@ -7,36 +7,9 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>Teacher Dashboard</title>
   <link rel="stylesheet" href="teacher_style.css">
-  <style>
-    .sidebar-footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 15px;
-      margin-top: auto;
-    }
-    .user-info {
-      width: 100%;
-      padding: 0 0 15px 0;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 15px;
-    }
-    .user-name {
-      color: #333;
-      font-size: 16px;
-      margin: 0;
-      font-weight: 600;
-    }
-    .signout {
-      width: 100%;
-    }
-  </style>
+
 </head>
 <body>
   <!-- ===== HEADER ===== -->
@@ -66,16 +39,15 @@ session_start();
 
       <!-- ===== SIDEBAR FOOTER ===== -->
       <div class="sidebar-footer">
-      <div class="user-info">
-        <?php
-        // display name stored in session by login.php
-        if (!empty($_SESSION['name'])) {
-          echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
-        } else {
-          echo '<p class="user-name">Not logged in</p>';
-        }
-        ?>
-      </div>
+          <div class="user-info">
+            <?php
+              if (!empty($_SESSION['name'])) {
+                  echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+              } else {
+                  echo '<p class="user-name">Not logged in</p>';
+              }
+            ?>
+          </div>
         <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon"> Sign Out
         </button>
@@ -103,21 +75,21 @@ session_start();
           </div>
         </div>
 
-        <!-- File Table -->
-        <div>
-          <h3 style="margin-bottom: 10px;">Files</h3>
+        <!-- File Section -->
+        <div class="file-section">
+          <h3>Files</h3>
           <table class="data-table">
             <thead>
               <tr>
                 <th>Filename</th>
                 <th>Submitted Date</th>
                 <th>Status</th>
-                <th>Approve Date</th>
+                <th>Approved Date</th>
               </tr>
             </thead>
             <tbody id="fileTableBody">
               <tr>
-                <td colspan="4" style="text-align: center; color: #888;">No data available</td>
+                <td colspan="4" class="no-data">No data available</td>
               </tr>
             </tbody>
           </table>

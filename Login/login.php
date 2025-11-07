@@ -17,11 +17,16 @@ if (isset($_POST['btnSignIn'])) {
         exit();
     }
 
-    $stmt = $pdo->prepare("SELECT password_hash, role FROM users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT password_hash, role, name FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password_hash'])) {
+        session_start();
+        $_SESSION['email'] = $email;
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['name'] = $user['name'];
+    
         if (isset($redirects[$user['role']])) {
             header("Location: " . $redirects[$user['role']]);
             exit();

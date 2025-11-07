@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', function() {
+  // Sign out button handling
+  const signoutBtn = document.getElementById('signoutBtn');
+  if (signoutBtn) {
+    signoutBtn.addEventListener('click', function() {
+      // Navigate to logout.php which destroys the session and redirects
+      window.location.href = '../Login/logout.php';
+    });
+  }
+});
+
 const userTab = document.getElementById("userTab");
 const logsTab = document.getElementById("logsTab");
 const userSection = document.getElementById("userSection");

@@ -1,8 +1,15 @@
+<?php
+// ensure session is started before any output so session cookie and vars are available
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Adviser Dashboard</title>
   <link rel="stylesheet" href="styleAdviserDashboard.css">
 </head>
@@ -38,6 +45,16 @@
 
       <!-- ===== SIDEBAR FOOTER ===== -->
       <div class="sidebar-footer">
+        <div class="user-info">
+          <?php
+            // display name stored in session by login.php
+            if (!empty($_SESSION['name'])) {
+                echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+            } else {
+                echo '<p class="user-name">Not logged in</p>';
+            }
+          ?>
+        </div>
         <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon"> Sign Out
         </button>
@@ -49,11 +66,11 @@
       <section class="content-box active" id="dashboard">
         <div class="section-header">
           <h2>Dashboard</h2>
-          <span style="color: #666; font-size: 14px;">(Overview of Advisory & Files)</span>
+          <span>(Overview of Advisory & Files)</span>
         </div>
 
         <!-- Summary Cards -->
-        <div style="display: flex; gap: 20px; margin-bottom: 30px; margin-top: 20px;">
+        <div class="summary-cards-container">
           <div class="summary-card">
             <h3>Total Students</h3>
             <p id="studentCount">—</p>
@@ -69,8 +86,8 @@
         </div>
 
         <!-- File Table -->
-        <div>
-          <h3 style="margin-bottom: 10px;">Recent Files</h3>
+        <div class="file-section">
+          <h3>Recent Files</h3>
           <table class="data-table">
             <thead>
               <tr>
@@ -82,7 +99,7 @@
             </thead>
             <tbody id="fileTableBody">
               <tr>
-                <td colspan="4" style="text-align: center; color: #888;">No data available</td>
+                <td colspan="4" class="no-data">No data available</td>
               </tr>
             </tbody>
           </table>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,16 @@
 
       <!-- ===== SIDEBAR FOOTER ===== -->
       <div class="sidebar-footer">
-        <button class="signout">
+        <div class="user-info">
+          <?php
+            if (!empty($_SESSION['name'])) {
+              echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+            } else {
+              echo '<p class="user-name">Not logged in</p>';
+            }
+          ?>
+        </div>
+        <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon">
           Sign Out
         </button>
@@ -89,6 +99,18 @@
     openModal.addEventListener("click", () => modal.style.display = "flex");
     closeModal.addEventListener("click", () => modal.style.display = "none");
     window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+  </script>
+
+  <script src="scriptTeacher.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const signoutBtn = document.getElementById('signoutBtn');
+      if (signoutBtn) {
+        signoutBtn.addEventListener('click', function() {
+          window.location.href = '../Login/logout.php';
+        });
+      }
+    });
   </script>
 
 </body>

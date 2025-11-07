@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +26,15 @@
       </div>
 
       <div class="sidebar-footer">
+        <div class="user-info">
+          <?php
+            if (!empty($_SESSION['name'])) {
+              echo '<p class="user-name">' . htmlspecialchars($_SESSION['name']) . '</p>';
+            } else {
+              echo '<p class="user-name">Not logged in</p>';
+            }
+          ?>
+        </div>
         <button class="signout" id="signoutBtn">
           <img src="out.png" alt="Logout Icon">
           Sign Out
@@ -85,6 +95,16 @@
   </div> <!-- end dashboard container -->
 
   <!-- ===== JAVASCRIPT FILE LINK ===== -->
-  <script src="scriptTeacherStudents.js"></script>
+  <script src="scriptTeacher.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const signoutBtn = document.getElementById('signoutBtn');
+      if (signoutBtn) {
+        signoutBtn.addEventListener('click', function() {
+          window.location.href = '../Login/logout.php';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

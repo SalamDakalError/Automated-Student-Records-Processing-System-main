@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'school_login';
+$dbname = 'school';
 $username = 'root'; 
 $password = '';
 try {

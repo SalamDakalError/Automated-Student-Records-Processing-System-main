@@ -1,5 +1,14 @@
  // Navigation handling
     document.addEventListener('DOMContentLoaded', function() {
+      // Sign out button handling
+      const signoutBtn = document.getElementById('signoutBtn');
+      if (signoutBtn) {
+        signoutBtn.addEventListener('click', function() {
+          // Navigate to logout.php which destroys the session and redirects
+          window.location.href = '../Login/logout.php';
+        });
+      }
+
       // Get all sidebar links
       const sidebarLinks = document.querySelectorAll('.sidebar .menu a');
       
