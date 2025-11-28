@@ -69,35 +69,8 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>ESP-5-Magsaysay</td>
-              <td>Raul Magsaysay</td>
-              <td>January 13, 2025</td>
-              <td><span class="status approve">Approved</span></td>
-              <td class="actions-cell">
-                <span class="no-action">—</span>
-              </td>
-            </tr>
-            <tr>
-              <td>ESP-5-Quezon</td>
-              <td>Raul Magsaysay</td>
-              <td>January 13, 2025</td>
-              <td><span class="status pending">Pending</span></td>
-              <td class="actions-cell">
-                <button class="action-btn approve-btn" title="Approve">✓</button>
-                <button class="action-btn reject-btn" title="Reject">✕</button>
-              </td>
-            </tr>
-            <tr>
-              <td>ESP-6-Earth</td>
-              <td>Raul Magsaysay</td>
-              <td>January 13, 2025</td>
-              <td><span class="status approve">Approved</span></td>
-              <td class="actions-cell">
-                <span class="no-action">—</span>
-              </td>
-            </tr>
+          <tbody id="filesTableBody">
+            <tr><td colspan="5" style="text-align:center;padding:20px;">Loading files...</td></tr>
           </tbody>
         </table>
       </div>
@@ -105,8 +78,65 @@
   </div>
 
   <script>
+    // Load files on page load
+    function loadFiles() {
+      fetch('principal_list_files.php')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('filesTableBody').innerHTML = html;
+          attachApproveRejectHandlers();
+        })
+        .catch(err => {
+          document.getElementById('filesTableBody').innerHTML = '<tr><td colspan="5" style="color:red;">Error loading files</td></tr>';
+        });
+    }
+
+    // Attach event listeners to approve/reject buttons
+    function attachApproveRejectHandlers() {
+      document.querySelectorAll('.approve-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const fileId = this.getAttribute('data-file-id');
+          if (confirm('Are you sure you want to approve this file?')) {
+            updateFileStatus(fileId, 'approve');
+          }
+        });
+      });
+
+      document.querySelectorAll('.reject-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const fileId = this.getAttribute('data-file-id');
+          if (confirm('Are you sure you want to reject this file?')) {
+            updateFileStatus(fileId, 'reject');
+          }
+        });
+      });
+    }
+
+    // Update file status via AJAX
+    function updateFileStatus(fileId, action) {
+      fetch('principal_update_file.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=' + action + '&file_id=' + fileId
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            // Reload files to reflect changes
+            loadFiles();
+          } else {
+            alert('Error: ' + (data.error || 'Unknown error'));
+          }
+        })
+        .catch(err => {
+          alert('Failed to update file: ' + err.message);
+        });
+    }
+
     // Sign out functionality
     document.addEventListener('DOMContentLoaded', function() {
+      loadFiles();
+
       const signoutBtn = document.getElementById('signoutBtn');
       if (signoutBtn) {
         signoutBtn.addEventListener('click', function() {
@@ -115,33 +145,6 @@
           }
         });
       }
-    });
-
-    // Approve/Reject functionality
-    document.querySelectorAll('.approve-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        if(confirm('Are you sure you want to approve this file?')) {
-          // Add your approval logic here
-          const row = this.closest('tr');
-          const statusCell = row.querySelector('.status');
-          statusCell.textContent = 'Approved';
-          statusCell.classList.remove('pending');
-          statusCell.classList.add('approve');
-          
-          // Remove action buttons
-          this.closest('.actions-cell').innerHTML = '<span class="no-action">—</span>';
-        }
-      });
-    });
-
-    document.querySelectorAll('.reject-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        if(confirm('Are you sure you want to reject this file?')) {
-          // Add your rejection logic here
-          const row = this.closest('tr');
-          row.remove(); // Or update status to rejected
-        }
-      });
     });
   </script>
 

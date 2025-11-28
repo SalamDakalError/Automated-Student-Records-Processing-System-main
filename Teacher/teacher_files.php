@@ -66,7 +66,6 @@
                 <th>Submitted Date</th>
                 <th>Status</th>
                 <th>Approve Date</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -76,6 +75,16 @@
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- ===== FILE VIEWER MODAL (OVERLAY) ===== -->
+  <div class="file-viewer-modal" id="fileViewerModal">
+    <div class="file-viewer-content">
+      <button class="close-viewer" id="closeViewer">✖</button>
+      <div id="fileViewerContainer" style="width:100%;height:100%;padding:40px;overflow:auto;">
+        <!-- Preview will be loaded here -->
+      </div>
+    </div>
   </div>
 
   <!-- ===== UPLOAD MODAL ===== -->
@@ -245,6 +254,41 @@
 
     // initial load
     loadFiles();
+
+    // File Viewer Modal
+    const fileViewerModal = document.getElementById('fileViewerModal');
+    const closeViewer = document.getElementById('closeViewer');
+    const fileViewerContainer = document.getElementById('fileViewerContainer');
+
+    closeViewer.addEventListener('click', () => fileViewerModal.style.display = 'none');
+    fileViewerModal.addEventListener('click', (e) => {
+      if (e.target === fileViewerModal) fileViewerModal.style.display = 'none';
+    });
+
+    // Delegate click on filename to open viewer
+    document.querySelector('.data-table tbody').addEventListener('click', (e) => {
+      if (e.target.classList.contains('file-link')) {
+        e.preventDefault();
+        const filePath = e.target.getAttribute('data-file-path');
+        const fileName = e.target.getAttribute('data-file-name');
+        openFileViewer(filePath, fileName);
+      }
+    });
+
+    function openFileViewer(filePath, fileName) {
+      fileViewerContainer.innerHTML = '<p style="text-align:center;margin-top:20px;">Loading file...</p>';
+      fileViewerModal.style.display = 'flex';
+      
+      // Use iframe to display the file
+      const iframe = document.createElement('iframe');
+      iframe.src = filePath;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      
+      fileViewerContainer.innerHTML = '';
+      fileViewerContainer.appendChild(iframe);
+    }
   </script>
 
   <script src="scriptTeacher.js"></script>

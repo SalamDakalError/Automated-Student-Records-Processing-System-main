@@ -67,7 +67,6 @@
                 <th>Submitted Date</th>
                 <th>Status</th>
                 <th>Approve Date</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>

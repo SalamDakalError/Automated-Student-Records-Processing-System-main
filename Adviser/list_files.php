@@ -34,16 +34,16 @@ foreach($rows as $r){
     $submitted = $r['submitted_date'] ? htmlspecialchars(date('Y-m-d H:i', strtotime($r['submitted_date']))) : '-';
     $approve = $r['approve_date'] ? htmlspecialchars(date('Y-m-d H:i', strtotime($r['approve_date']))) : '-';
     $filePath = htmlspecialchars($r['file_path']);
+    $fileId = intval($r['id']);
 
     // link to file (pages are in subfolders so prefix with ../)
     $href = '../' . $filePath;
 
     echo "<tr>";
-    echo "<td><a href=\"{$href}\" target=\"_blank\">{$fileName}</a><div style=\"color:#666;font-size:12px;margin-top:4px;\">{$subject} — {$grade} — {$teacher}</div></td>";
+    echo "<td><a href=\"{$href}\" download>{$fileName}</a></td>";
     echo "<td>{$submitted}</td>";
     echo "<td>" . ucfirst($status) . "</td>";
     echo "<td>{$approve}</td>";
-    echo "<td><a href=\"{$href}\" download>Download</a></td>";
     echo "</tr>";
 }
 
