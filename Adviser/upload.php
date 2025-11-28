@@ -74,7 +74,7 @@ try{
         ':grade_section' => $grade_section,
         ':file_name' => $originalName,
         ':file_path' => $relativePath,
-        ':status' => 'submitted'
+        ':status' => 'pending'
     ]);
     echo json_encode(['success'=>true,'message'=>'File uploaded and record saved']);
 } catch (Exception $e){

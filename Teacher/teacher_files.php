@@ -219,7 +219,7 @@
         if (data.success){
           alert('Upload successful');
           closeUploadModalHandler();
-          // TODO: refresh table data
+          loadFiles();
         } else {
           showPreviewError(data.error || 'Upload failed');
         }
@@ -230,6 +230,21 @@
         uploadFileBtn.textContent = 'Upload';
       }
     });
+
+    // Load files table via AJAX and inject rows (use Adviser endpoint)
+    async function loadFiles(){
+      try{
+        const res = await fetch('../Adviser/list_files.php?teacher=1');
+        const html = await res.text();
+        const tbody = document.querySelector('.data-table tbody');
+        if (tbody) tbody.innerHTML = html;
+      }catch(err){
+        console.error('Failed to load files:', err);
+      }
+    }
+
+    // initial load
+    loadFiles();
   </script>
 
   <script src="scriptTeacher.js"></script>
