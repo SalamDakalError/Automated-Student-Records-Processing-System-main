@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Principal - Files</title>
-  <link rel="stylesheet" href="stylePrincipalDashboard.css">
-  <link rel="stylesheet" href="principal_files.css">
+  <link rel="stylesheet" href="stylePrincipalDashboard.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="principal_files.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
@@ -70,7 +70,7 @@
             </tr>
           </thead>
           <tbody id="filesTableBody">
-            <tr><td colspan="5" style="text-align:center;padding:20px;">Loading files...</td></tr>
+            <tr><td colspan="5" class="no-data">Loading files...</td></tr>
           </tbody>
         </table>
       </div>
@@ -87,7 +87,7 @@
           attachApproveRejectHandlers();
         })
         .catch(err => {
-          document.getElementById('filesTableBody').innerHTML = '<tr><td colspan="5" style="color:red;">Error loading files</td></tr>';
+          document.getElementById('filesTableBody').innerHTML = '<tr><td colspan="5" class="no-data" style="color:red;">Error loading files</td></tr>';
         });
     }
 
