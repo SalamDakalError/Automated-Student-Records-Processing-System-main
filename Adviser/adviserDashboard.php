@@ -31,10 +31,10 @@ session_start();
         </a>
         <a href="student_list.php">
           <img src="User.png" alt="Student Icon">
-          Student
+          Students
         </a>
         <a href="advisory.php">
-          <img src="class.png" alt="Advisory Icon">
+          <img src="google-docs.png" alt="Advisory Icon">
           Advisory
         </a>
         <a href="files.php">
