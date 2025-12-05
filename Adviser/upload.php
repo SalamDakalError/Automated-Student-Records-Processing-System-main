@@ -55,7 +55,7 @@ if (!is_dir($uploadsDir)){
 }
 
 $safeName = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', basename($originalName));
-$targetName = time() . '_' . $safeName;
+$targetName = $safeName;
 $targetPath = $uploadsDir . '/' . $targetName;
 
 if (!move_uploaded_file($uploaded['tmp_name'], $targetPath)){

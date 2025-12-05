@@ -16,7 +16,21 @@ try {
     if ($action === 'approve') {
         $stmt = $pdo->prepare('UPDATE teacher_files SET status = :status, approve_date = NOW() WHERE id = :id');
         $stmt->execute([':status' => 'approved', ':id' => $fileId]);
-        echo json_encode(['success' => true, 'action' => 'approve', 'newStatus' => 'Approved', 'statusClass' => 'approve']);
+        // After approving, attempt to import the uploaded file into DB
+        $importResult = null;
+        try {
+            require_once __DIR__ . '/../includes/excel_importer.php';
+            $q = $pdo->prepare('SELECT file_path FROM teacher_files WHERE id = :id');
+            $q->execute([':id' => $fileId]);
+            $r = $q->fetch(PDO::FETCH_ASSOC);
+            if ($r && !empty($r['file_path'])) {
+                $importResult = import_excel_file($r['file_path'], $pdo);
+            }
+        } catch (Exception $e) {
+            $importResult = ['success' => false, 'rows' => 0, 'message' => 'Import failed: ' . $e->getMessage()];
+        }
+
+        echo json_encode(['success' => true, 'action' => 'approve', 'newStatus' => 'Approved', 'statusClass' => 'approve', 'import' => $importResult]);
     } elseif ($action === 'reject') {
         $stmt = $pdo->prepare('UPDATE teacher_files SET status = :status WHERE id = :id');
         $stmt->execute([':status' => 'rejected', ':id' => $fileId]);
